@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galleries App | Home Page</title>
+</head>
+<body>
+    <div>
+        Galleries App
+
+        {% if uploaded_file_urls %}
+            {% for url in uploaded_file_urls %}
+                <div>
+                    <a href="{{ url }}"><img src="{{ url }}"/></a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
