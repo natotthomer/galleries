@@ -22,10 +22,9 @@ def home(request):
 def read(request, id):
     gallery = Gallery.objects.get(id=id)
 
-    return render(request, 'gallery.html', {'gallery': gallery})
+    return JsonResponse({ 'gallery': gallery.to_client() })
 
 def create(request):
-    import pdb; pdb.set_trace()
     if request.method == 'POST' and request.FILES:
         fs = FileSystemStorage()
         responseData = []
@@ -43,6 +42,6 @@ def create(request):
                 else:
                     print(form.errors)
             else:
-                raise ValueError('Galleries may not have more than 5 associated images. Please try again with fewer images')
-        return JsonResponse({ 'data': responseData })
-    return render(request, 'gallery.html')
+                return JsonResponse({ 'error': 'Galleries may not have more than 5 associatd images. Please try again.'})
+        return JsonResponse({ 'gallery': gallery.to_client() })
+    return JsonResponse({ 'error': 'Server expects a POST request.'})

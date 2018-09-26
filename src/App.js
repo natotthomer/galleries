@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import { Router, Route, Link } from 'react-router-dom'
+
 import { fetcher } from './utils.js'
+import history from './history'
+import Home from './Home'
+import Gallery from './Gallery'
 
 export default class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            files: []
+            currentGallery: []
         }
 
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -18,7 +23,7 @@ export default class App extends Component {
             method: 'POST', 
             data: this.state.files,
             url: '/api/gallery/new'
-        }).then(response => console.log('wow: ', response))
+        }).then(response => history.push(`/gallery/${response.gallery.id}`))
     }
 
     handleFileChange (e) {
@@ -28,14 +33,20 @@ export default class App extends Component {
     
     render () {
         return (
-            <div>
-                Galleries App
-                <form onSubmit={this.handleFormSubmit}>
-                    <input type="file" name='file' multiple onChange={this.handleFileChange}></input>
-                    <input type="text" name="title" placeholder="title"></input>
-                    <input type="submit"></input>
-                </form>
-            </div>
+            <Router history={history}>
+                <div>
+                    <Link to='/'>
+                        <div className="jumbotron">
+                            <div className="jumbotron__content">
+                                Galleries App
+                            </div>
+                        </div>
+                    </Link>
+                    <Route exact path='/' render={(props) => <Home handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
+                    <Route path='/gallery/:id' component={Gallery} />
+                </div>
+
+            </Router>
         )
     }
 }
