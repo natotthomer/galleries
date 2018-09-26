@@ -5,6 +5,7 @@ import { fetcher } from './utils.js'
 import history from './history'
 import Home from './Home'
 import Gallery from './Gallery'
+import Header from './Header'
 
 export default class App extends Component {
     constructor (props) {
@@ -16,6 +17,21 @@ export default class App extends Component {
 
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleFileChange = this.handleFileChange.bind(this)
+    }
+
+    componentDidMount () {
+        if (window.__REACT_STATE__ && window.__REACT_STATE__.user) {
+            this.setState({ user: window.__REACT_STATE__.user })
+        } else {
+            fetcher({
+                url: '/api/user/sign_in',
+                data: {
+                    username: 'jack',
+                    password: 'secret123'
+                },
+                method: 'POST'
+            }).then(response => this.setState({ user: response.user }))
+        }
     }
 
     handleFormSubmit (e) {
@@ -47,6 +63,9 @@ export default class App extends Component {
         return (
             <Router history={history}>
                 <div>
+                    <div className="header">
+                        <Header user={this.state.user} />
+                    </div>
                     <Link to='/'>
                         <div className="jumbotron">
                             <div className="jumbotron__content">

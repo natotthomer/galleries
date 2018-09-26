@@ -2,6 +2,10 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
 a {
     color: black;
     text-decoration: none;
@@ -12,6 +16,21 @@ a:link {
 }
 
 #root {}
+
+.header {
+    box-shadow: 0 1px 10px #BBB;
+    overflow: hidden;
+}
+
+.header__title-item {
+    padding: 10px 0px 10px 10px;
+}
+
+.header__auth-item {
+    font-size: 12px;
+    padding: 10px 10px 10px 0px;
+    float: left;
+}
 
 .jumbotron {
     text-align: center;
@@ -59,4 +78,12 @@ a:link {
 
 .gallery__image-container img {
     width: 100%;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
 }

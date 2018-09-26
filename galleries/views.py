@@ -1,30 +1,29 @@
+import json
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth import login
+
 
 
 from galleries.models import Gallery, Image
 from galleries.forms import ImageForm
 
 def home(request):
-    return render(request, "base.html")
+    if request.user.is_authenticated:
+        user = {'id': request.user.id, 'username': request.user.username }
+    else:
+        user = None
+    return render(request, "base.html", { 'user': json.dumps(user) })
 
-# # def create(request):
-#     if request.POST:
-#         title = request.POST.get('title')
-#         gallery = Gallery.objects.create(title=title)
-#         # for file in request.FILES.getlist('files'):
-#         #     pass
-#         return redirect(f'/gallery/{gallery.id}/')
-    
-
-def read(request, id):
+def read_gallery(request, id):
     gallery = Gallery.objects.get(id=id)
 
     return JsonResponse({ 'gallery': gallery.to_client() })
 
-def create(request):
+def create_gallery(request):
     if request.method == 'POST' and request.FILES:
         fs = FileSystemStorage()
         responseData = []
