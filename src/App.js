@@ -10,7 +10,8 @@ export default class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            currentGallery: []
+            currentGallery: [],
+            errors: []
         }
 
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -23,7 +24,18 @@ export default class App extends Component {
             method: 'POST', 
             data: this.state.files,
             url: '/api/gallery/new'
-        }).then(response => history.push(`/gallery/${response.gallery.id}`))
+        }).then(response => {
+            if (response.gallery) {
+                this.setState({ errors: [] })
+                history.push(`/gallery/${response.gallery.id}`)
+            } else {
+                console.log(this.state.errors)
+                const errors = this.state.errors.slice()
+                errors.push(response.error)
+                console.log(errors)
+                this.setState({ errors })
+            }
+        })
     }
 
     handleFileChange (e) {
@@ -42,7 +54,7 @@ export default class App extends Component {
                             </div>
                         </div>
                     </Link>
-                    <Route exact path='/' render={(props) => <Home handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
+                    <Route exact path='/' render={(props) => <Home errors={this.state.errors} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
                     <Route path='/gallery/:id' component={Gallery} />
                 </div>
 

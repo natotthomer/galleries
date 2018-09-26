@@ -27,6 +27,36 @@ a:link {
     text-align: center;
 }
 
+.home__form-container {
+    margin-bottom: 20px;
+}
+
 .home__prompt {
     padding-bottom: 20px;
+}
+
+.home__errors {
+    color: red;
+    font-size: 8pt;
+}
+
+.gallery__images-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.gallery__image-container {
+    width: 20%;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.gallery__image-container div {
+    padding: 10px 20px;
+}
+
+.gallery__image-container img {
+    width: 100%;
 }

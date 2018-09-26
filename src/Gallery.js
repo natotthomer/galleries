@@ -22,8 +22,10 @@ export default class Gallery extends Component {
         if (this.state.gallery.images) {
             this.state.gallery.images.forEach((image, idx) => {
                 images.push(
-                    <div key={idx}>
-                        <img src={image} />
+                    <div key={idx} className="gallery__image-container">
+                        <div>
+                            <img src={image} />
+                        </div>
                     </div>
                 )
             })
@@ -31,7 +33,9 @@ export default class Gallery extends Component {
         return (
             <div>
                 Gallery
-                {images}
+                <div className="gallery__images-list">
+                    {images}
+                </div>
             </div>
         )
     }

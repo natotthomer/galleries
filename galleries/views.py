@@ -40,8 +40,8 @@ def create(request):
                     image.save()
                     responseData.append(image.file.url)
                 else:
-                    print(form.errors)
+                    JsonResponse({ error: form.errors })
             else:
-                return JsonResponse({ 'error': 'Galleries may not have more than 5 associatd images. Please try again.'})
+                return JsonResponse({ 'error': 'Galleries may not have more than 5 associated images. Please try again.'})
         return JsonResponse({ 'gallery': gallery.to_client() })
     return JsonResponse({ 'error': 'Server expects a POST request.'})
