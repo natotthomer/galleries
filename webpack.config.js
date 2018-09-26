@@ -29,7 +29,6 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"]
   },
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
-    new webpack.HotModuleReplacementPlugin()
+    new BundleTracker({filename: './webpack-stats.json'})
   ]
 }

@@ -7,8 +7,8 @@ from galleries import views as galleries_views
 
 urlpatterns = [
     url(r'^$', galleries_views.home, name='home'),
-    url(r'^gallery/$', galleries_views.create, name='create'),
-    url(r'^gallery/(\d+)/$', galleries_views.read, name='read'),
+    url(r'^api/gallery/new$', galleries_views.create, name='create'),
+    url(r'^api/gallery/(\d+)/$', galleries_views.read, name='read'),
     url(r'^admin/', admin.site.urls),
 ]
 

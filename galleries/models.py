@@ -1,7 +1,7 @@
 from django.db import models
 
 class Gallery(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True, null=True, default='New Gallery')
 
 class Image(models.Model):
     file = models.FileField(upload_to='documents/')
