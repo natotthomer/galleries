@@ -28,7 +28,7 @@ except FileNotFoundError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['galleries-noh.heroku.com', 'localhost']
+ALLOWED_HOSTS = ['galleries-noh.herokuapp.com', 'localhost ']
 
 
 # Application definition
