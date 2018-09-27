@@ -14,7 +14,7 @@ def home(request):
         user = {'id': request.user.id, 'username': request.user.username }
         print('hullo!')
     else:
-        user = None
+        user = json.dumps(None)
     return render(request, "base.html", { 'payload': { 'user': user } })
 
 def read_gallery(request, id):
