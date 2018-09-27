@@ -2,6 +2,7 @@ const Cookies = require('js-cookie')
 
 export const fetcher = options => new Promise((resolve, reject) => {
     const csrftoken = Cookies.get('csrftoken')
+    console.log(csrftoken)
     const defaults = {
         credentials: 'include',
           headers: new Headers({
