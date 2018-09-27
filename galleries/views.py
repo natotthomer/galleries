@@ -5,10 +5,12 @@ from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import login
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from galleries.models import Gallery, Image, Vote
 from galleries.forms import ImageForm
 
+@ensure_csrf_cookie
 def home(request):
     if request.user.is_authenticated:
         user = {'id': request.user.id, 'username': request.user.username }

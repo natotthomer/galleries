@@ -5,3 +5,4 @@ media/
 webpack-stats.json
 galleries/__pycache__/
 secret_key.txt
+galleries/secret.txt
