@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^api/user/new$', account_views.create, name='create_user'),
     url(r'^api/user/sign_in$', account_views.sign_in, name='sign_in'),
     url(r'^api/user/sign_out$', account_views.sign_out, name='sign_out'),
+    url(r'^api/vote$', galleries_views.new_vote, name='new_vote'),
     url(r'^admin/', admin.site.urls),
 ]
 

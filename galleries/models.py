@@ -1,11 +1,12 @@
 from django.db import models
+from django.conf import settings
 
 class Gallery(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True, default='New Gallery')
 
     def to_client(self):
         image_set = Image.objects.filter(gallery=self)
-        images_json = [image.file.url for image in image_set]
+        images_json = [image.to_client() for image in image_set]
         
         return {
             'title': self.title,
@@ -23,3 +24,17 @@ class Image(models.Model):
         null=True,
         related_name='images'
     )
+
+    def to_client(self):
+        return {
+            'url': self.file.url,
+            'id': self.id
+        }
+
+class Vote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, default=None)
+
+    class Meta:
+        unique_together = ('user', 'gallery')

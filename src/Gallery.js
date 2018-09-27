@@ -1,40 +1,57 @@
 import React, { Component } from 'react'
-import { fetcher } from './utils.js'
+
+import API from './api'
 
 export default class Gallery extends Component {
     constructor (props) {
         super(props)
 
         this.state = {
-            gallery: {}
+            gallery: {},
+            user_vote: -1
         }
+
+        this.handleClick = this.handleClick.bind(this)
+        this.renderImages = this.renderImages.bind(this)
     }
     
     componentDidMount () {
-        fetcher({
-            url: `/api/gallery/${this.props.match.params.id}/`
-        }).then(response => this.setState({ gallery: response.gallery }))
+        API.fetchGallery(this.props.match.params.id)
+            .then(response => this.setState(response))
     }
-    
-    render () {
+
+    handleClick (image) {
+        API.vote({
+            gallery: this.state.gallery.id,
+            image
+        }).then(response => this.setState(response)).then(() => console.log(this.state))
+    }
+
+    renderImages () {
         let images = []
 
         if (this.state.gallery.images) {
             this.state.gallery.images.forEach((image, idx) => {
+                const className = this.state.user_vote === image.id ? "gallery__image-container voted" : "gallery__image-container"
+                const boundClickHandler = () => this.handleClick(image.id)
                 images.push(
-                    <div key={idx} className="gallery__image-container">
+                    <div key={idx} className={className} onClick={boundClickHandler}>
                         <div>
-                            <img src={image} />
+                            <img src={image.url} />
                         </div>
                     </div>
                 )
             })
         }
+        return images
+    }
+    
+    render () {
         return (
             <div>
                 Gallery
                 <div className="gallery__images-list">
-                    {images}
+                    {this.renderImages()}
                 </div>
             </div>
         )

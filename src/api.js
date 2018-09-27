@@ -9,6 +9,12 @@ const API = {
         })
     },
 
+    fetchGallery: galleryId => {
+        return fetcher({
+            url: `/api/gallery/${galleryId}/`
+        })
+    },
+
     newUser: data => {
         return fetcher({
             url: '/api/user/new',
@@ -39,6 +45,14 @@ const API = {
             method: 'POST'
         })
     },
+
+    vote: data => {
+        return fetcher({
+            url: '/api/vote',
+            method: 'POST',
+            data
+        })
+    }
 }
 
 export default API

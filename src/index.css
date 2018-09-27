@@ -80,6 +80,15 @@ a:link {
     align-items: center;
 }
 
+.gallery__image-container:hover {
+    cursor: pointer;
+    background: grey;
+}
+
+.voted {
+    background: pink;
+}
+
 .gallery__image-container div {
     padding: 10px 20px;
 }
