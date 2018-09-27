@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Header = props => {
-    if (props.user) {
+    if (props.user !== null) {
         return (
             <div className="header">
                 <div className="float-left">
@@ -9,7 +9,7 @@ const Header = props => {
                 </div>
                 <div className='float-right'>
                     <span className='header__auth-item'>{`Welcome back, ${props.user.username}`}</span>
-                    <span className='header__auth-item'>  Log out</span>
+                    <span className='header__auth-item header__logout' onClick={props.handleSignOut}>Log out</span>
                 </div>
             </div>
         )

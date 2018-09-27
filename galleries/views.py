@@ -16,7 +16,7 @@ def home(request):
         user = {'id': request.user.id, 'username': request.user.username }
     else:
         user = None
-    return render(request, "base.html", { 'user': json.dumps(user) })
+    return render(request, "base.html", { 'payload': { 'user': json.dumps(user) } })
 
 def read_gallery(request, id):
     gallery = Gallery.objects.get(id=id)
@@ -43,4 +43,4 @@ def create_gallery(request):
             else:
                 return JsonResponse({ 'error': 'Galleries may not have more than 5 associated images. Please try again.'})
         return JsonResponse({ 'gallery': gallery.to_client() })
-    return JsonResponse({ 'error': 'Server expects a POST request.'})
+    return JsonResponse({ 'error': 'Server expects a POST request.'}, status=400)

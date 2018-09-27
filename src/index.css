@@ -32,6 +32,14 @@ a:link {
     float: left;
 }
 
+.header__logout {
+    cursor: pointer;
+}
+
+.header__logout:hover {
+    text-decoration: underline;
+}
+
 .jumbotron {
     text-align: center;
     padding: 50px 0;
