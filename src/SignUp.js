@@ -17,6 +17,7 @@ export default class SignUp extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this)
         this.handlePassword1Change = this.handlePassword1Change.bind(this)
         this.handlePassword2Change = this.handlePassword2Change.bind(this)
+        this.renderErrors = this.renderErrors.bind(this)
     }
 
     handleSignUp (e) {
@@ -38,6 +39,17 @@ export default class SignUp extends Component {
 
     handlePassword2Change (e) {
         this.setState({ password2: e.target.value })
+    }
+    
+    renderErrors () {
+        let errors = []
+        if (this.props.error) {
+            this.props.error.forEach(error => {
+                errors.push(<div>{error}</div>)
+            })
+        }
+
+        return errors
     }
     
     render () {
@@ -97,6 +109,9 @@ export default class SignUp extends Component {
                     </form>
                     <div>
                         Already have an account? <Link to={'/sign_in'} className="text-link">Sign in instead</Link>
+                    </div>
+                    <div className="home__errors">
+                        {this.renderErrors()}
                     </div>
                 </div>
             </div>

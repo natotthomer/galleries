@@ -11,7 +11,10 @@ def create(request):
             user = login(request)
 
             return JsonResponse({ 'user': user })
-        return JsonResponse({ 'error': form.errors }, status=400)
+        errors = []
+        for field, error in form.errors.items():
+            errors.append(f"{field}: {error.data[0].message}\n")
+        return JsonResponse({ 'error': errors }, status=400)
     return JsonResponse({ 'error': 'Expecting POST request' }, status=400)
 
 def sign_out(request):
@@ -23,7 +26,7 @@ def sign_in(request):
     if user:
         return JsonResponse({ 'user': user })
     return JsonResponse(
-        {'login': 'Invalid email/password combination'},
+        {'error': 'Invalid email/password combination'},
         status=400
     )
 
