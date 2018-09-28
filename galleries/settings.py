@@ -27,7 +27,7 @@ except FileNotFoundError:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('DJANGO_DEBUG') is True:
+if os.environ.get('DJANGO_DEBUG'):
     DEBUG = True
 
 ALLOWED_HOSTS = ['galleries-noh.herokuapp.com', 'localhost']
@@ -82,14 +82,6 @@ WSGI_APPLICATION = 'galleries.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# if os.environ.get('DJANGO_DEBUG') is True:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         }
-#     }
-# else:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -152,7 +144,6 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
-# if os.environ.get('DJANGO_DEBUG') is False:
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'galleries-noh'
