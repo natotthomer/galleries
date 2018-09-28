@@ -23,9 +23,11 @@ class Image(models.Model):
     )
 
     def to_client(self):
+        votes = self.vote_set.all().count()
         return {
             'url': self.file.url,
-            'id': self.id
+            'id': self.id,
+            'votes': votes
         }
 
 class Vote(models.Model):
@@ -35,3 +37,10 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ('user', 'gallery')
+
+    def to_client(self):
+        return {
+            'gallery': self.gallery.id,
+            'image': self.image.id,
+            'user': self.user.id
+        }

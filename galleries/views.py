@@ -21,11 +21,11 @@ def home(request):
 def read_gallery(request, id):
     gallery = Gallery.objects.prefetch_related('vote_set').get(id=id)
     try:
-        user_vote = gallery.vote_set.get(user=request.user)
+        user_vote = gallery.vote_set.get(user=request.user).image.id
     except Vote.DoesNotExist:
         user_vote = None
 
-    return JsonResponse({ 'gallery': gallery.to_client(), 'user_vote': user_vote.image.id if user_vote else None })
+    return JsonResponse({ 'gallery': gallery.to_client(), 'user_vote': user_vote })
 
 def create_gallery(request):
     if request.method == 'POST' and request.FILES:
@@ -57,16 +57,14 @@ def new_vote(request):
     image_id = request.POST.get('image')
     user = request.user
 
+
+
     try:
-        Vote.objects.update(
-            gallery_id=gallery_id,
-            user=user,
-            image_id=image_id
-        )
         vote = Vote.objects.get(
             gallery_id=gallery_id,
             user=user
         )
+        return JsonResponse({ 'error': 'You may only vote once per gallery!'}, status=400)
     except Vote.DoesNotExist:
         vote = Vote.objects.create(
             gallery_id=gallery_id,

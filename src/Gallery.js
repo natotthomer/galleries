@@ -38,6 +38,7 @@ export default class Gallery extends Component {
                     <div key={idx} className={className} onClick={boundClickHandler}>
                         <div>
                             <img src={image.url} />
+                            <div>{image.votes}</div>
                         </div>
                     </div>
                 )
