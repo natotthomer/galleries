@@ -14,7 +14,6 @@ from galleries.forms import ImageForm
 def home(request):
     if request.user.is_authenticated:
         user = {'id': request.user.id, 'username': request.user.username }
-        print('hullo!')
     else:
         user = json.dumps(None)
     return render(request, "base.html", { 'payload': { 'user': user } })
