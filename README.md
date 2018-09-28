@@ -10,7 +10,7 @@ The live site is available at [https://galleries-noh.herokuapp.com](https://gall
 
 For this project, I used the following:
 
-* JavaScrip
+* JavaScript
 * Python
 * React
 * React Router
