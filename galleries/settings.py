@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    with open('galleries/secret.txt') as f:
+    with open('secret.txt') as f:
         SECRET_KEY = f.read().strip()
 except FileNotFoundError:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
