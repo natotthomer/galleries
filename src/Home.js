@@ -2,16 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = props => {
-    let errors = []
-    if (props.errors.length > 0) {
-        props.errors.forEach((error, idx) => {
-            errors.push(
-                <div key={idx} className="error-message">
-                    {error}
+    let error = <div className="error-message">
+                    {props.error}
                 </div>
-            )
-        })
-    }
     return (
         <div className="home">
             <div className="home__prompt">
@@ -26,7 +19,7 @@ const Home = props => {
                 </form>
             </div>
             <div className='home__errors'>
-                {errors}
+                {error}
             </div>
             { props.user ? '' : <div><div>You must be signed in to make galleries.</div><br/> <Link className='text-link' to='/sign_in'>Sign in here!</Link></div>}
         </div>

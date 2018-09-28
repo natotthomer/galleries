@@ -14,8 +14,7 @@ export default class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            currentGallery: [],
-            errors: [],
+            error: [],
             user: null
         }
 
@@ -43,14 +42,10 @@ export default class App extends Component {
         e.preventDefault()
         API.newGallery(this.state.files).then(response => {
             if (response.gallery) {
-                this.setState({ errors: [] })
+                this.setState({ error: null })
                 history.push(`/gallery/${response.gallery.id}`)
-            } else {
-                const errors = this.state.errors.slice()
-                errors.push(response.error)
-                this.setState({ errors })
             }
-        })
+        }).catch(response => this.setState({ error: response.error }))
     }
 
     handleFileChange (e) {
@@ -85,7 +80,7 @@ export default class App extends Component {
                             </div>
                         </div>
                     </Link>
-                    <Route exact path='/' render={(props) => <Home user={this.state.user} errors={this.state.errors} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
+                    <Route exact path='/' render={(props) => <Home user={this.state.user} error={this.state.error} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
                     <Route path='/sign_in' render={(props) => <SignIn handleSignIn={this.handleSignIn} />} />
                     <Route path='/sign_up' render={(props) => <SignUp handleSignUp={this.handleSignUp} />} />
                     <Route path='/gallery/:id' component={Gallery} />
