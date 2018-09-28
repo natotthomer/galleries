@@ -21,7 +21,6 @@ const Home = props => {
             <div className="home__form-container">
                 <form onSubmit={props.handleFormSubmit}>
                     <input type="file" name='file' multiple onChange={props.handleFileChange}></input>
-                    <input type="text" name="title" placeholder="title"></input>
                     <input type="submit"></input>
                 </form>
             </div>

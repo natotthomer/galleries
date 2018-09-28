@@ -2,14 +2,11 @@ from django.db import models
 from django.conf import settings
 
 class Gallery(models.Model):
-    title = models.CharField(max_length=100, blank=True, null=True, default='New Gallery')
-
     def to_client(self):
         image_set = Image.objects.filter(gallery=self)
         images_json = [image.to_client() for image in image_set]
         
         return {
-            'title': self.title,
             'id': self.id,
             'images': images_json
         }

@@ -31,7 +31,7 @@ def create_gallery(request):
     if request.method == 'POST' and request.FILES:
         fs = FileSystemStorage()
         responseData = []
-        gallery = Gallery.objects.create(title=request.POST.get('title'))
+        gallery = Gallery.objects.create()
         
         for i in range(len(request.FILES)):
             if i < 5:
@@ -45,7 +45,7 @@ def create_gallery(request):
                 else:
                     JsonResponse({ error: form.errors })
             else:
-                return JsonResponse({ 'error': 'Galleries may not have more than 5 associated images. Please try again.'})
+                return JsonResponse({ 'error': 'Galleries may not have more than 5 associated images. Please try again.'}, status=400)
         return JsonResponse({ 'gallery': gallery.to_client() })
     return JsonResponse({ 'error': 'Server expects a POST request.'}, status=400)
 
