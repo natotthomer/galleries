@@ -57,10 +57,8 @@ def new_vote(request):
         return JsonResponse({ 'error': 'You must be signed in to vote!'}, status=400)
 
     gallery_id = request.POST.get('gallery')
-    image_id = request.POST.get('image')
+    image_id = int(request.POST.get('image'))
     user = request.user
-
-
 
     try:
         vote = Vote.objects.get(
