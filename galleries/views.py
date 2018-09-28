@@ -1,10 +1,8 @@
 import json
 
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from django.conf import settings
+from django.shortcuts import render
+from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
-from django.contrib.auth import login
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 from galleries.models import Gallery, Image, Vote
