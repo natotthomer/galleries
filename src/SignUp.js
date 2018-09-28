@@ -42,17 +42,61 @@ export default class SignUp extends Component {
     
     render () {
         return (
-            <div>
-                <div className="sign-in-container">
-                    <form onSubmit={this.handleSignUp}>
-                        <input type='text' onChange={this.handleUsernameChange} value={this.setState.username}></input>
-                        <input type='text' onChange={this.handleEmailChange} value={this.setState.email}></input>
-                        <input type='password' onChange={this.handlePassword1Change} value={this.setState.password1}></input>
-                        <input type='password' onChange={this.handlePassword2Change} value={this.setState.password2}></input>
+            <div className='auth-form__outer-container'>
+                <div className="auth-form__inner-container">
+                    <form onSubmit={this.handleSignUp} className="auth-form">
+                        <div className='auth-form__input'>
+                            <div style={{ textAlign: 'center' }}>
+                                <input 
+                                    name='username'
+                                    type='text' 
+                                    onChange={this.handleUsernameChange} 
+                                    value={this.setState.username}></input>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <label htmlFor='username'>username</label>
+                            </div>
+                        </div>
+                        <div className='auth-form__input'>
+                            <div style={{ textAlign: 'center' }}>
+                                <input 
+                                    name='email'
+                                    type='text' 
+                                    onChange={this.handleEmailChange} 
+                                    value={this.setState.email}></input>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <label htmlFor='email'>email</label>
+                            </div>
+                        </div>
+                        <div className='auth-form__input'>
+                            <div style={{ textAlign: 'center' }}>
+                                <input 
+                                    name='password1'
+                                    type='password' 
+                                    onChange={this.handlePassword1Change} 
+                                    value={this.setState.password1}></input>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <label htmlFor='password1'>password1</label>
+                            </div>
+                        </div>
+                        <div className='auth-form__input'>
+                            <div style={{ textAlign: 'center' }}>
+                                <input 
+                                    name='password2'
+                                    type='password' 
+                                    onChange={this.handlePassword2Change} 
+                                    value={this.setState.password2}></input>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <label htmlFor='password2'>password2</label>
+                            </div>
+                        </div>
                         <input type='submit'></input>
                     </form>
                     <div>
-                        Already have an account? <Link to={'/sign_in'}>Sign in instead</Link>
+                        Already have an account? <Link to={'/sign_in'} className="text-link">Sign in instead</Link>
                     </div>
                 </div>
             </div>

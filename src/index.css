@@ -67,6 +67,32 @@ a:link {
     font-size: 8pt;
 }
 
+.auth-form__outer-container {
+    margin: auto;
+    width: 500px;
+}
+
+.auth-form__inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.auth-form__inputs {
+    display: flex;
+}
+
+.auth-form__input {
+    margin: 5px 5px 10px 5px;
+}
+
 .gallery__images-list {
     display: flex;
     flex-direction: row;
@@ -103,4 +129,8 @@ a:link {
 
 .float-left {
     float: left;
+}
+
+.text-link:hover {
+    text-decoration: underline;
 }
