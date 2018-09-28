@@ -82,7 +82,10 @@ WSGI_APPLICATION = 'galleries.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+print('DJANGO_DEBUG')
+print(os.environ.get('DJANGO_DEBUG'))
 if os.environ.get('DJANGO_DEBUG'):
+    print('has sqlite')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -90,6 +93,7 @@ if os.environ.get('DJANGO_DEBUG'):
         }
     }
 else:
+    print('no sqlite')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
