@@ -8,7 +8,8 @@ export default class Gallery extends Component {
 
         this.state = {
             gallery: {},
-            user_vote: -1
+            user_vote: -1,
+            error: null
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -18,6 +19,12 @@ export default class Gallery extends Component {
     componentDidMount () {
         API.fetchGallery(this.props.match.params.id)
             .then(response => this.setState(response))
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+        if (!this.props.user && prevProps.user) {
+            this.setState({ error: null, user_vote: -1 })
+        }
     }
 
     handleClick (image) {

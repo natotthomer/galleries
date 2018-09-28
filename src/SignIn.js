@@ -29,7 +29,6 @@ export default class SignIn extends Component {
     }
     
     render () {
-        console.log(this.props)
         return (
             <div className='auth-form__outer-container'>
                 <div className="auth-form__inner-container">
@@ -66,7 +65,7 @@ export default class SignIn extends Component {
                         New user? <Link to={'/sign_up'} className="text-link">Sign up instead</Link>
                     </div>
                     <div className="home__errors">
-                        {this.props.error}
+                        {typeof this.props.error === 'string' ? this.props.error : ''}
                     </div>
                 </div>
             </div>

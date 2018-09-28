@@ -43,7 +43,7 @@ export default class SignUp extends Component {
     
     renderErrors () {
         let errors = []
-        if (this.props.error) {
+        if (this.props.error && this.props.error instanceof Array) {
             this.props.error.forEach(error => {
                 errors.push(<div>{error}</div>)
             })

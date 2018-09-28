@@ -15,7 +15,7 @@ export default class App extends Component {
         super(props)
         
         this.state = {
-            error: [],
+            error: null,
             user: null
         }
 
@@ -60,19 +60,15 @@ export default class App extends Component {
     handleSignIn (data) {
         API.login(data).then(response => this.setState({ user: response.user }))
             .then(() => history.push('/'))
-            .catch(response => {
-                console.log(response)
-                this.setState({ error: response.error })
-            })
+            .then(() => this.setState({ error: null }))
+            .catch(response => this.setState({ error: response.error }))
     }
 
     handleSignUp (data) {
         API.signup(data).then(response => this.setState({ user: response.user }))
             .then(() => history.push('/'))
-            .catch(response => {
-                console.log(response)
-                this.setState({ error: response.error })
-            })
+            .then(() => this.setState({ error: null }))
+            .catch(response => this.setState({ error: response.error }))
     }
     
     render () {
@@ -90,7 +86,7 @@ export default class App extends Component {
                     <Route exact path='/' render={(props) => <Home user={this.state.user} error={this.state.error} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
                     <Route path='/sign_in' render={(props) => <SignIn handleSignIn={this.handleSignIn} error={this.state.error} />} />
                     <Route path='/sign_up' render={(props) => <SignUp handleSignUp={this.handleSignUp} error={this.state.error} />} />
-                    <Route path='/gallery/:id' component={Gallery} />
+                    <Route path='/gallery/:id' render={(props) => <Gallery {...props} user={this.state.user} /> } />
                 </div>
 
             </Router>
