@@ -13,6 +13,7 @@ import SignUp from './SignUp'
 export default class App extends Component {
     constructor (props) {
         super(props)
+        
         this.state = {
             error: [],
             user: null
@@ -70,9 +71,7 @@ export default class App extends Component {
         return (
             <Router history={history}>
                 <div>
-                    <div className="header">
-                        <Header user={this.state.user} handleSignOut={this.handleSignOut} />
-                    </div>
+                    <Header user={this.state.user} handleSignOut={this.handleSignOut} />
                     <Link to='/'>
                         <div className="jumbotron">
                             <div className="jumbotron__content">
