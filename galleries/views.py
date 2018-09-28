@@ -28,6 +28,9 @@ def read_gallery(request, id):
     return JsonResponse({ 'gallery': gallery.to_client(), 'user_vote': user_vote })
 
 def create_gallery(request):
+    if not request.user or not request.user.is_authenticated:
+        return JsonResponse({ 'error': 'You cannot make a new gallery without logging in first!'}, status=400)
+
     if request.method == 'POST' and request.FILES:
         fs = FileSystemStorage()
         responseData = []
@@ -64,7 +67,7 @@ def new_vote(request):
             gallery_id=gallery_id,
             user=user
         )
-        return JsonResponse({ 'error': 'You may only vote once per gallery!'}, status=400)
+        return JsonResponse({ 'error': 'You may only vote once per gallery!' }, status=400)
     except Vote.DoesNotExist:
         vote = Vote.objects.create(
             gallery_id=gallery_id,

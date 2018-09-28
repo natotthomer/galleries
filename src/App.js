@@ -85,7 +85,7 @@ export default class App extends Component {
                             </div>
                         </div>
                     </Link>
-                    <Route exact path='/' render={(props) => <Home errors={this.state.errors} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
+                    <Route exact path='/' render={(props) => <Home user={this.state.user} errors={this.state.errors} handleFormSubmit={this.handleFormSubmit} handleFileChange={this.handleFileChange} />} />
                     <Route path='/sign_in' render={(props) => <SignIn handleSignIn={this.handleSignIn} />} />
                     <Route path='/sign_up' render={(props) => <SignUp handleSignUp={this.handleSignUp} />} />
                     <Route path='/gallery/:id' component={Gallery} />

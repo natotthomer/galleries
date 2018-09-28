@@ -24,7 +24,8 @@ export default class Gallery extends Component {
         API.vote({
             gallery: this.state.gallery.id,
             image
-        }).then(response => this.setState(response)).then(() => console.log(this.state))
+        }).then(response => this.setState(response))
+        .catch(response => this.setState({ error: response.error }))
     }
 
     renderImages () {
@@ -53,6 +54,9 @@ export default class Gallery extends Component {
                 Gallery
                 <div className="gallery__images-list">
                     {this.renderImages()}
+                </div>
+                <div className='home__errors' style={{ textAlign: 'center' }}>
+                    {this.state.error}
                 </div>
             </div>
         )
