@@ -53,3 +53,8 @@ There are a number of improvements I'd like to make, but I'll try to be brief:
 * If I were building this out for real, I'd probably make a custom User model so that I could add custom methods to it (a serializer method, for example). It's sometimes a bit tricky, so it's best to do early in the dev process.
 * I'm not entirely happy with how I handled errors, both on the frontend and the backend. I think especially the frontend is a bit brittle and if I were to do this project again, I'd start by slightly reorganizing my React components in order to ease up on some of that. This is an area where some sort of global store (or stores) would probably come in handy in that I'd be able to more effortlessly push the right errors into the right components rather than checking what the errors look like. If I had more time, this would be a first priority (but it may involve a larger structuraly/architectural reimagining).
 * (EDIT) I would love to add test suites, but it's a skill I'm only just developing and wouldn't quite know how to fit it into a project of this type and size.
+
+## Notes
+
+- would have done a more robust job of separating out settings for different environments in separate settings files (`development_settings.py`, `production_settings.py`, or perhaps even `heroku_settings.py`)
+- 
